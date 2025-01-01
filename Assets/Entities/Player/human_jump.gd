@@ -8,4 +8,9 @@ func Enter():
 	
 func Physics_update(_delta: float):
 	if player.is_on_floor():
-		Transitioned.emit(self, "HumanMovement")
+		Transitioned.emit(self, "HumanWalk")
+
+	animation()
+	
+func animation():
+		pass

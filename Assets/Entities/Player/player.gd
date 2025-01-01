@@ -7,10 +7,13 @@ extends CharacterBody3D
 @export var JUMP_VELOCITY = 4.5
 @export var JUMP_MOVE_DAMP = 2
 @export var SRINT_MULTI = 1.8
+@export_range(5, 10,0.1) var CROUCH_SPEED: float = 7.0
 @export var MOUSE_SENSITIVITY: float = 0.5
 @export var TILT_LOWER_LIMIT : = deg_to_rad(-90.0)
 @export var TTIL_UPPER_LIMIT : = deg_to_rad(90.0)
 @export var CAMERA_CONTROLER : Camera3D
+@export var ANIMATION_PLAYER : AnimationPlayer
+@export var CROUCH_SHAPECAST : Node3D
 
 var _mouse_input: bool = false
 var _mouse_rotation: Vector3
@@ -25,6 +28,8 @@ func _ready():
 
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
+	CROUCH_SHAPECAST.add_exception($".")
+
 func _physics_process(delta):
 		# Add the gravity.
 	if not is_on_floor():
@@ -32,7 +37,7 @@ func _physics_process(delta):
 	
 	
 		# Handle jump.
-	if Input.is_action_just_pressed("Jump") and is_on_floor():
+	if Input.is_action_just_pressed("Jump") and is_on_floor() and _is_crouching == false:
 		velocity.y = JUMP_VELOCITY
 
 
@@ -51,8 +56,6 @@ func _physics_process(delta):
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 
-	
-	
 	
 	_update_camera(delta)
 	
@@ -87,11 +90,14 @@ func _update_camera(delta):
 	_rotation_input = 0.0
 	_tilt_input = 0.0
 
-
-
 func toggle_crouch():
-	if _is_crouching == true: 
-		print("crouching")
+	print(_is_crouching, CROUCH_SHAPECAST.get_collider(0))
+	if _is_crouching == true and CROUCH_SHAPECAST.is_colliding() == false: 
+		ANIMATION_PLAYER.play("Crouch", -1, -CROUCH_SPEED, true)
 	elif _is_crouching == false:
-		print("uncrouching")
-	_is_crouching = !_is_crouching
+		ANIMATION_PLAYER.play("Crouch", -1, CROUCH_SPEED)
+
+
+func _on_animation_player_animation_started(anim_name):
+	if  anim_name == "Crouch":
+		_is_crouching = !_is_crouching

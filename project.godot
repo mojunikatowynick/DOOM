@@ -21,8 +21,8 @@ Global="*res://Global/Global.gd"
 
 [display]
 
-window/size/viewport_width=800
-window/size/viewport_height=600
+window/size/viewport_width=960
+window/size/viewport_height=540
 
 [input]
 
@@ -128,3 +128,4 @@ ExitGame={
 3d_physics/layer_2="Player"
 3d_physics/layer_3="Entities"
 3d_physics/layer_4="Projectiles"
+3d_physics/layer_5="Areas"

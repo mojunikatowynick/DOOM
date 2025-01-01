@@ -1,9 +1,9 @@
-[gd_scene load_steps=15 format=3 uid="uid://cysvwq6vufnuq"]
+[gd_scene load_steps=18 format=3 uid="uid://cysvwq6vufnuq"]
 
 [ext_resource type="PackedScene" uid="uid://75yfqm3lg0ul" path="res://Assets/Areas/TestArea/Graphic/TestArea.blend" id="1_6fpgm"]
 
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_ps4nn"]
-data = PackedVector3Array(-76.3, 0, 52.1, 76.3, 0, -52.1, 76.3, 0, 52.1, -76.3, 0, 52.1, -76.3, 0, -52.1, 76.3, 0, -52.1)
+[sub_resource type="BoxShape3D" id="BoxShape3D_hksb2"]
+size = Vector3(150, 0.005, 104)
 
 [sub_resource type="BoxMesh" id="BoxMesh_0ia0h"]
 
@@ -40,17 +40,25 @@ size = Vector3(7, 0.5, 7)
 albedo_color = Color(0.871558, 1.92523e-07, 0.520521, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_6isgw"]
-size = Vector3(7, 1, 7)
+size = Vector3(7, 0.5, 7)
+
+[sub_resource type="BoxMesh" id="BoxMesh_5qaxx"]
+size = Vector3(7, 0.5, 7)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1bwwx"]
+albedo_color = Color(0.428994, 0.506957, 0.514426, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_lyt3x"]
+size = Vector3(7, 0.5, 7)
 
 [node name="Land" type="Node3D"]
 
-[node name="StaticBody3D" type="StaticBody3D" parent="."]
-collision_mask = 15
+[node name="TestArea" parent="." instance=ExtResource("1_6fpgm")]
 
-[node name="TestArea" parent="StaticBody3D" instance=ExtResource("1_6fpgm")]
+[node name="BASE" type="StaticBody3D" parent="TestArea"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
-shape = SubResource("ConcavePolygonShape3D_ps4nn")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TestArea/BASE"]
+shape = SubResource("BoxShape3D_hksb2")
 
 [node name="cube" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.46809, 0.5, -5.34112)
@@ -86,7 +94,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_g13jm")
 shape = SubResource("BoxShape3D_kh1gg")
 
 [node name="platformcrouchdog" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.075, 1.5, 28.202)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.075, 0.151822, 28.202)
 collision_mask = 3
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="platformcrouchdog"]
@@ -96,4 +104,15 @@ surface_material_override/0 = SubResource("StandardMaterial3D_ciueg")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="platformcrouchdog"]
 shape = SubResource("BoxShape3D_6isgw")
 
-[editable path="StaticBody3D/TestArea"]
+[node name="platformcrouchdog2" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.8327, 2.90332, 28.202)
+collision_mask = 3
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="platformcrouchdog2"]
+mesh = SubResource("BoxMesh_5qaxx")
+surface_material_override/0 = SubResource("StandardMaterial3D_1bwwx")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="platformcrouchdog2"]
+shape = SubResource("BoxShape3D_lyt3x")
+
+[editable path="TestArea"]

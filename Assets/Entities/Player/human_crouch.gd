@@ -7,3 +7,8 @@ func Enter():
 	Global.State_check = "Human Crouch"
 	
 #func Physics_update(_delta: float):
+#
+	#animation()
+	#
+#func animation():
+		#pass

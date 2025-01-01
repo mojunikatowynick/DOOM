@@ -18,5 +18,5 @@ script = ExtResource("1_aattw")
 [node name="UI" parent="." instance=ExtResource("4_eh5sq")]
 
 [editable path="Land"]
-[editable path="Land/StaticBody3D/TestArea"]
+[editable path="Land/TestArea"]
 [editable path="Player"]
