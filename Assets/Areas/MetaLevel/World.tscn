@@ -1,0 +1,22 @@
+[gd_scene load_steps=6 format=3 uid="uid://cge0mobn3tpw1"]
+
+[ext_resource type="Script" path="res://Assets/Areas/MetaLevel/world.gd" id="1_aattw"]
+[ext_resource type="PackedScene" uid="uid://bxfyh13buqn8g" path="res://Assets/Areas/Skybox/skybox_1.tscn" id="1_fsbew"]
+[ext_resource type="PackedScene" uid="uid://cysvwq6vufnuq" path="res://Assets/Areas/TestArea/land.tscn" id="1_he54e"]
+[ext_resource type="PackedScene" uid="uid://b1t0d7fsy6bix" path="res://Assets/Entities/Player/player.tscn" id="2_700yf"]
+[ext_resource type="PackedScene" uid="uid://byksa8i31mdc2" path="res://Assets/UI/UIScene/ui.tscn" id="4_eh5sq"]
+
+[node name="World" type="Node3D"]
+script = ExtResource("1_aattw")
+
+[node name="Skybox1" parent="." instance=ExtResource("1_fsbew")]
+
+[node name="Land" parent="." instance=ExtResource("1_he54e")]
+
+[node name="Player" parent="." instance=ExtResource("2_700yf")]
+
+[node name="UI" parent="." instance=ExtResource("4_eh5sq")]
+
+[editable path="Land"]
+[editable path="Land/StaticBody3D/TestArea"]
+[editable path="Player"]

@@ -1,0 +1,55 @@
+[gd_scene load_steps=9 format=3 uid="uid://b1t0d7fsy6bix"]
+
+[ext_resource type="Script" path="res://Assets/Entities/Player/player.gd" id="1_s4w7m"]
+[ext_resource type="Script" path="res://Assets/Entities/Player/state_machine.gd" id="2_eptjr"]
+[ext_resource type="Script" path="res://Assets/Entities/Player/human_movement.gd" id="3_rusd6"]
+[ext_resource type="Script" path="res://Assets/Entities/Player/human_jump.gd" id="4_h3o5n"]
+[ext_resource type="Script" path="res://Assets/Entities/Player/human_crouch.gd" id="5_cjc2m"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_yjauy"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s1lhu"]
+albedo_color = Color(0.756863, 0, 0.317647, 1)
+metallic = 0.09
+emission = Color(0.631031, 0.198114, 0.630244, 1)
+emission_energy_multiplier = 3.99
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_1c8e6"]
+material = SubResource("StandardMaterial3D_s1lhu")
+
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("CAMERA_CONTROLER")]
+collision_layer = 2
+collision_mask = 13
+script = ExtResource("1_s4w7m")
+MOUSE_SENSITIVITY = 0.2
+CAMERA_CONTROLER = NodePath("CameraControler/Camera3D")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_yjauy")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D"]
+mesh = SubResource("CapsuleMesh_1c8e6")
+
+[node name="CameraControler" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0)
+
+[node name="Camera3D" type="Camera3D" parent="CameraControler"]
+
+[node name="ReflectionProbe" type="ReflectionProbe" parent="CameraControler/Camera3D"]
+update_mode = 1
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("2_eptjr")
+initial_state = NodePath("HumanMovement")
+
+[node name="HumanMovement" type="Node" parent="StateMachine" node_paths=PackedStringArray("player")]
+script = ExtResource("3_rusd6")
+player = NodePath("../..")
+
+[node name="HumanJump" type="Node" parent="StateMachine" node_paths=PackedStringArray("player")]
+script = ExtResource("4_h3o5n")
+player = NodePath("../..")
+
+[node name="HumanCrouch" type="Node" parent="StateMachine"]
+script = ExtResource("5_cjc2m")

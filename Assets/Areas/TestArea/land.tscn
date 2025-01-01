@@ -1,0 +1,99 @@
+[gd_scene load_steps=15 format=3 uid="uid://cysvwq6vufnuq"]
+
+[ext_resource type="PackedScene" uid="uid://75yfqm3lg0ul" path="res://Assets/Areas/TestArea/Graphic/TestArea.blend" id="1_6fpgm"]
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_ps4nn"]
+data = PackedVector3Array(-76.3, 0, 52.1, 76.3, 0, -52.1, 76.3, 0, 52.1, -76.3, 0, 52.1, -76.3, 0, -52.1, 76.3, 0, -52.1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_0ia0h"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e6cfa"]
+albedo_color = Color(0.282353, 0.678431, 0.282353, 1)
+metallic = 1.0
+metallic_specular = 1.0
+roughness = 0.66
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dnvhs"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_1dmyc"]
+size = Vector3(7, 0.5, 7)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c02kk"]
+albedo_color = Color(0.541853, 0.490678, 0.266541, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xbo1n"]
+size = Vector3(7, 0.5, 7)
+
+[sub_resource type="BoxMesh" id="BoxMesh_4fb7k"]
+size = Vector3(7, 0.5, 7)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g13jm"]
+albedo_color = Color(0.757567, 0.323502, 0.427217, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_kh1gg"]
+size = Vector3(7, 0.5, 7)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ssdy1"]
+size = Vector3(7, 0.5, 7)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ciueg"]
+albedo_color = Color(0.871558, 1.92523e-07, 0.520521, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_6isgw"]
+size = Vector3(7, 1, 7)
+
+[node name="Land" type="Node3D"]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+collision_mask = 15
+
+[node name="TestArea" parent="StaticBody3D" instance=ExtResource("1_6fpgm")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_ps4nn")
+
+[node name="cube" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.46809, 0.5, -5.34112)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="cube"]
+mesh = SubResource("BoxMesh_0ia0h")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_e6cfa")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="cube"]
+shape = SubResource("BoxShape3D_dnvhs")
+
+[node name="platform" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.075, 2.5, 8.131)
+collision_mask = 3
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="platform"]
+mesh = SubResource("BoxMesh_1dmyc")
+surface_material_override/0 = SubResource("StandardMaterial3D_c02kk")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="platform"]
+shape = SubResource("BoxShape3D_xbo1n")
+
+[node name="platformcrouch" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.075, 2, 17.9366)
+collision_mask = 3
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="platformcrouch"]
+mesh = SubResource("BoxMesh_4fb7k")
+surface_material_override/0 = SubResource("StandardMaterial3D_g13jm")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="platformcrouch"]
+shape = SubResource("BoxShape3D_kh1gg")
+
+[node name="platformcrouchdog" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.075, 1.5, 28.202)
+collision_mask = 3
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="platformcrouchdog"]
+mesh = SubResource("BoxMesh_ssdy1")
+surface_material_override/0 = SubResource("StandardMaterial3D_ciueg")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="platformcrouchdog"]
+shape = SubResource("BoxShape3D_6isgw")
+
+[editable path="StaticBody3D/TestArea"]

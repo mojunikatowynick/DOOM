@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://bxfyh13buqn8g"]
+
+[ext_resource type="Texture2D" uid="uid://h2tuybss7ikj" path="res://Assets/Areas/Skybox/kloppenheim_01_puresky_4k.exr" id="1_s8djy"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_spits"]
+panorama = ExtResource("1_s8djy")
+
+[sub_resource type="Sky" id="Sky_pksba"]
+sky_material = SubResource("PanoramaSkyMaterial_spits")
+
+[sub_resource type="Environment" id="Environment_gse6q"]
+background_mode = 2
+sky = SubResource("Sky_pksba")
+
+[node name="Skybox1" type="WorldEnvironment"]
+environment = SubResource("Environment_gse6q")
+
+[node name="OmniLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.912249, 0.128267, -0.389037, -0.0102389, 0.956555, 0.291372, 0.409508, -0.261821, 0.873929, 0, 0, 0)
+shadow_enabled = true
