@@ -1,6 +1,6 @@
 extends CharacterBody3D
 
-
+@export var TOGGLE_CROUCH: bool = true
 @export var SPEED = 5.0
 @export var ACCELERATION = 0.1
 @export var DECELERATION = 0.25
@@ -31,7 +31,7 @@ func _ready():
 	CROUCH_SHAPECAST.add_exception($".")
 
 func _physics_process(delta):
-		# Add the gravity.
+		# Add the gravity. PLAYER_CONTROLER: CharacterBody3D
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 	
@@ -69,10 +69,19 @@ func _unhandled_input(event):
 		_tilt_input = -event.relative.y * MOUSE_SENSITIVITY
 		#print(Vector2(_rotation_input,_tilt_input))
 
-func _input(_event):
-	if Input.is_action_just_pressed("Crouch"):
+func _input(event):
+	if event.is_action_pressed("Crouch") and TOGGLE_CROUCH == true:
 		toggle_crouch()
-
+		
+	##### crouching when holiding button ####
+	if event.is_action_pressed("Crouch") and TOGGLE_CROUCH == false:
+		if CROUCH_SHAPECAST.is_colliding() == false:
+			crouching(true)
+	if event.is_action_released("Crouch") and TOGGLE_CROUCH == false:
+		if CROUCH_SHAPECAST.is_colliding() == false:
+			crouching(false)
+		elif CROUCH_SHAPECAST.is_colliding() == true:
+			uncrouching_check()
 
 func _update_camera(delta):
 
@@ -91,13 +100,27 @@ func _update_camera(delta):
 	_tilt_input = 0.0
 
 func toggle_crouch():
-	print(_is_crouching, CROUCH_SHAPECAST.get_collider(0))
+	#print(_is_crouching, CROUCH_SHAPECAST.get_collider(0))
 	if _is_crouching == true and CROUCH_SHAPECAST.is_colliding() == false: 
-		ANIMATION_PLAYER.play("Crouch", -1, -CROUCH_SPEED, true)
+		crouching(false)
 	elif _is_crouching == false:
-		ANIMATION_PLAYER.play("Crouch", -1, CROUCH_SPEED)
+		crouching(true)
 
+func crouching(state: bool):
+	print(state)
+	match state:
+		true:
+			ANIMATION_PLAYER.play("Crouch", 0, CROUCH_SPEED)
+		false:
+			ANIMATION_PLAYER.play("Crouch", 0, -CROUCH_SPEED, true)
 
+func uncrouching_check():
+	if CROUCH_SHAPECAST.is_colliding() == false:
+		crouching(false)
+	if CROUCH_SHAPECAST.is_colliding() == true: 
+		await get_tree().create_timer(0.1).timeout
+		uncrouching_check()
+		
 func _on_animation_player_animation_started(anim_name):
 	if  anim_name == "Crouch":
 		_is_crouching = !_is_crouching

@@ -14,9 +14,11 @@ script = ExtResource("1_aattw")
 [node name="Land" parent="." instance=ExtResource("1_he54e")]
 
 [node name="Player" parent="." instance=ExtResource("2_700yf")]
+unique_name_in_owner = true
 
 [node name="UI" parent="." instance=ExtResource("4_eh5sq")]
 
 [editable path="Land"]
 [editable path="Land/TestArea"]
 [editable path="Player"]
+[editable path="UI"]

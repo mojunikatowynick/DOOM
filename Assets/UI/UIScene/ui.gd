@@ -3,6 +3,7 @@ extends CanvasLayer
 @onready var state_label = $Control/MarginContainer/StateLabel
 @onready var fps_label = $Control/MarginContainer/FPSLabel
 
+
 func _ready():
 	Global.connect("State_change", state_label_change)
 	state_label_change()

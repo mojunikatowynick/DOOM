@@ -37,3 +37,38 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 4
 text = "test2"
+
+[node name="UserInterfaceGame" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="Reticle" type="CenterContainer" parent="UserInterfaceGame"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TOP" type="Line2D" parent="UserInterfaceGame/Reticle"]
+points = PackedVector2Array(0, -5, 0, -15)
+width = 1.0
+
+[node name="BOT" type="Line2D" parent="UserInterfaceGame/Reticle"]
+points = PackedVector2Array(0, 5, 0, 15)
+width = 1.0
+
+[node name="LEFT" type="Line2D" parent="UserInterfaceGame/Reticle"]
+points = PackedVector2Array(-5, 0, -15, 0)
+width = 1.0
+
+[node name="RIGHT" type="Line2D" parent="UserInterfaceGame/Reticle"]
+points = PackedVector2Array(5, 0, 15, 0)
+width = 1.0

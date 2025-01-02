@@ -10,10 +10,12 @@ func Enter():
 	
 func Physics_update(_delta: float):
 	
-	if player.velocity != Vector3.ZERO and player.is_on_floor():
+	if player.velocity != Vector3.ZERO and player.is_on_floor() and player._is_crouching == false:
 		Transitioned.emit(self, "HumanWalk")
 	elif player.is_on_floor() == false:
 		Transitioned.emit(self, "HumanJump")
+	elif player._is_crouching == true:
+		Transitioned.emit(self, "HumanCrouch")
 	
 	animation()
 	
