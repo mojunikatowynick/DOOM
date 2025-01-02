@@ -31,6 +31,8 @@ func _ready():
 	CROUCH_SHAPECAST.add_exception($".")
 
 func _physics_process(delta):
+	
+	Global.Player_speed = velocity.length()
 		# Add the gravity. PLAYER_CONTROLER: CharacterBody3D
 	if not is_on_floor():
 		velocity += get_gravity() * delta
@@ -46,15 +48,15 @@ func _physics_process(delta):
 	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	if direction:
 		if Input.is_action_pressed("Sprint"):
-			velocity.x = direction.x * SPEED * SRINT_MULTI
-			velocity.z = direction.z * SPEED * SRINT_MULTI
+			velocity.x = lerp(velocity.x, direction.x * SPEED * SRINT_MULTI, ACCELERATION)
+			velocity.z = lerp(velocity.z, direction.z * SPEED * SRINT_MULTI, ACCELERATION)
 		else:
-			velocity.x = direction.x * SPEED
-			velocity.z = direction.z * SPEED
+			velocity.x = lerp(velocity.x, direction.x * SPEED, ACCELERATION)
+			velocity.z = lerp(velocity.z, direction.z * SPEED, ACCELERATION)
 	else:
 		#breaking speed from current vel to standstill "0" in time speed: change speed to fraction (0.1) for slowly slowing down
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-		velocity.z = move_toward(velocity.z, 0, SPEED)
+		velocity.x = move_toward(velocity.x, 0, DECELERATION)
+		velocity.z = move_toward(velocity.z, 0, DECELERATION)
 
 	
 	_update_camera(delta)

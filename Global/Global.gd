@@ -6,3 +6,5 @@ var State_check: String:
 	set(value):
 		State_check = value
 		State_change.emit()
+
+var Player_speed

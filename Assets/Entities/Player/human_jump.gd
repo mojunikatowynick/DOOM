@@ -6,11 +6,16 @@ class_name  HumanJump
 func Enter():
 	Global.State_check = "Human Jump"
 	
+	
 func Physics_update(_delta: float):
 	if player.is_on_floor():
 		Transitioned.emit(self, "HumanWalk")
 
 	animation()
-	
+
+func Exit():
+	pass
+
+
 func animation():
 		pass
