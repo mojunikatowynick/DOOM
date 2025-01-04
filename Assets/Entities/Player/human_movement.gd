@@ -15,7 +15,11 @@ func Enter(_previous_state):
 	player.DECELERATION = STATE_DECELERATION
 	
 	Global.State_check = "Human Walking"
-	ANIMATION_PLAYER.play("Walking")
+	if ANIMATION_PLAYER.is_playing() and ANIMATION_PLAYER.current_animation == "Jump_End":
+		await ANIMATION_PLAYER.animation_finished
+		ANIMATION_PLAYER.play("Walking", -1.0, 1.0)
+	else: 
+		ANIMATION_PLAYER.play("Walking", -1.0, 1.0)
 
 
 func Exit():

@@ -57,10 +57,6 @@ func update_input():
 		velocity.x = move_toward(velocity.x, 0, DECELERATION)
 		velocity.z = move_toward(velocity.z, 0, DECELERATION)
 
-	#if Input.is_action_just_pressed("Crouch"):
-		#ANIMATION_PLAYER.play("Crouch", -1.0)
-	#if Input.is_action_just_released("Crouch"):
-		#ANIMATION_PLAYER.play("Crouch", -1.0, -1, true )
 
 func _unhandled_input(event):
 
