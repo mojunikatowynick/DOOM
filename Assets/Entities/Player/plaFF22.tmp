@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://b1t0d7fsy6bix"]
+[gd_scene load_steps=16 format=3 uid="uid://b1t0d7fsy6bix"]
 
 [ext_resource type="Script" path="res://Assets/Entities/Player/player.gd" id="1_s4w7m"]
 [ext_resource type="Script" path="res://Assets/Entities/Player/state_machine.gd" id="2_eptjr"]
@@ -7,7 +7,6 @@
 [ext_resource type="Script" path="res://Assets/Entities/Player/human_jump.gd" id="4_h3o5n"]
 [ext_resource type="Script" path="res://Assets/Entities/Player/human_crouch.gd" id="5_cjc2m"]
 [ext_resource type="Script" path="res://Assets/Entities/Player/human_sprint.gd" id="7_skger"]
-[ext_resource type="Script" path="res://Assets/Entities/Player/human_slide.gd" id="8_6mhyr"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_yjauy"]
 
@@ -178,12 +177,14 @@ _data = {
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_5olwx"]
 
-[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("CAMERA_CONTROLER")]
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("CAMERA_CONTROLER", "ANIMATION_PLAYER", "CROUCH_SHAPECAST")]
 collision_layer = 2
 collision_mask = 13
 script = ExtResource("1_s4w7m")
 MOUSE_SENSITIVITY = 0.4
 CAMERA_CONTROLER = NodePath("CameraControler/Camera3D")
+ANIMATION_PLAYER = NodePath("AnimationPlayer")
+CROUCH_SHAPECAST = NodePath("ShapeCast3D")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -204,35 +205,25 @@ update_mode = 1
 script = ExtResource("2_eptjr")
 initial_state = NodePath("HumanIdle")
 
-[node name="HumanIdle" type="Node" parent="StateMachine" node_paths=PackedStringArray("player", "ANIMATION_PLAYER")]
+[node name="HumanIdle" type="Node" parent="StateMachine" node_paths=PackedStringArray("player")]
 script = ExtResource("3_lc4jw")
 player = NodePath("../..")
-ANIMATION_PLAYER = NodePath("../../AnimationPlayer")
 
-[node name="HumanWalk" type="Node" parent="StateMachine" node_paths=PackedStringArray("player", "ANIMATION_PLAYER")]
+[node name="HumanWalk" type="Node" parent="StateMachine" node_paths=PackedStringArray("player")]
 script = ExtResource("3_rusd6")
 player = NodePath("../..")
-ANIMATION_PLAYER = NodePath("../../AnimationPlayer")
 
 [node name="HumanJump" type="Node" parent="StateMachine" node_paths=PackedStringArray("player")]
 script = ExtResource("4_h3o5n")
 player = NodePath("../..")
 
-[node name="HumanCrouch" type="Node" parent="StateMachine" node_paths=PackedStringArray("player", "ANIMATION_PLAYER", "CROUCH_SHAPECAST")]
+[node name="HumanCrouch" type="Node" parent="StateMachine" node_paths=PackedStringArray("player")]
 script = ExtResource("5_cjc2m")
 player = NodePath("../..")
-ANIMATION_PLAYER = NodePath("../../AnimationPlayer")
-CROUCH_SHAPECAST = NodePath("../../ShapeCast3D")
 
-[node name="HumanSprint" type="Node" parent="StateMachine" node_paths=PackedStringArray("player", "ANIMATION_PLAYER")]
+[node name="HumanSprint" type="Node" parent="StateMachine" node_paths=PackedStringArray("player")]
 script = ExtResource("7_skger")
 player = NodePath("../..")
-ANIMATION_PLAYER = NodePath("../../AnimationPlayer")
-
-[node name="HumanSlide" type="Node" parent="StateMachine" node_paths=PackedStringArray("player", "ANIMATION_PLAYER")]
-script = ExtResource("8_6mhyr")
-player = NodePath("../..")
-ANIMATION_PLAYER = NodePath("../../AnimationPlayer")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

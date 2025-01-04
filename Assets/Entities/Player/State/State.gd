@@ -3,7 +3,7 @@ class_name State
 
 signal Transitioned
 
-func Enter():
+func Enter(previous_state):
 	pass
 	
 func Exit():
