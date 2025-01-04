@@ -34,6 +34,7 @@ func _physics_process(delta):
 	move_and_slide()
 
 	Global.Player_speed = velocity.length()
+	Global.Player_on_floor = is_on_floor()
 		# Add the gravity. PLAYER_CONTROLER: CharacterBody3D
 	if not is_on_floor():
 		velocity += get_gravity() * delta

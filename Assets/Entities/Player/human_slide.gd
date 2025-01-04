@@ -10,7 +10,7 @@ class_name  HumanSlide
 @export_range(1, 6, 0.1) var SLIDE_ANIM_SPEED: float = 4.0
 #@export var TOP_ANIM_SPEED: float = 3.0
 
-func Enter(previous_state):
+func Enter(_previous_state):
 	player.SPEED = STATE_SPEED
 	player.ACCELERATION = STATE_ACCELERATION
 	player.DECELERATION = STATE_DECELERATION
@@ -27,8 +27,8 @@ func set_tilt(player_rotation):
 	tilt.z = clamp(TILT_AMOUNT * player_rotation, -1.0, 0.1)
 	if tilt.z == 0.0:
 		tilt.z = 0.05
-	ANIMATION_PLAYER.get_animation("Sliding").track_set_key_value(8, 1, tilt)
-	ANIMATION_PLAYER.get_animation("Sliding").track_set_key_value(8, 2, tilt)
-
+	ANIMATION_PLAYER.get_animation("Sliding").track_set_key_value(3, 1, tilt)
+	ANIMATION_PLAYER.get_animation("Sliding").track_set_key_value(3, 2, tilt)
+	
 func finish():
 	Transitioned.emit(self, "HumanCrouch")

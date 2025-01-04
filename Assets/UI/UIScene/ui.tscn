@@ -44,6 +44,10 @@ text = "test"
 layout_mode = 2
 theme = ExtResource("2_m4l3y")
 
+[node name="IsOnFloorLabel" type="Label" parent="Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_m4l3y")
+
 [node name="UserInterfaceGame" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 15

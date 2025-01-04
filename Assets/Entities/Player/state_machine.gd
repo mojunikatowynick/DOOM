@@ -13,7 +13,7 @@ func _ready():
 				child.Transitioned.connect(on_child_transition)
 
 	if initial_state:
-		initial_state.Enter(previous_state)
+		initial_state.Enter(current_state)
 		current_state = initial_state
 	
 func _process(delta):
@@ -36,6 +36,6 @@ func on_child_transition(state, new_state_name):
 	if current_state:
 		current_state.Exit()
 	
-	new_state.Enter()
+	new_state.Enter(current_state)
 	
 	current_state = new_state

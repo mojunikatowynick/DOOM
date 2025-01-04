@@ -8,3 +8,4 @@ var State_check: String:
 		State_change.emit()
 
 var Player_speed
+var Player_on_floor

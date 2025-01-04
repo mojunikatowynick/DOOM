@@ -5,7 +5,7 @@ class_name  HumanIdle
 @export var player: CharacterBody3D
 @export var ANIMATION_PLAYER: AnimationPlayer
 
-func Enter(previous_state):
+func Enter(_previous_state):
 	ANIMATION_PLAYER.pause()
 	player.SPEED = 5.0
 	player.ACCELERATION = 0.1
@@ -16,6 +16,9 @@ func Enter(previous_state):
 func Physics_update(_delta: float):
 
 
+	if player.is_on_floor() and Input.is_action_just_pressed("Jump"):
+		Transitioned.emit(self, "HumanJump")
+	
 	if player.is_on_floor() and Input.is_action_just_pressed("Crouch"):
 		Transitioned.emit(self, "HumanCrouch")
 
@@ -24,6 +27,3 @@ func Physics_update(_delta: float):
 
 	if player.velocity != Vector3.ZERO and player.is_on_floor() and Input.is_action_just_pressed("Sprint"):
 		Transitioned.emit(self, "HumanSprint")
-
-	elif player.is_on_floor() == false:
-		Transitioned.emit(self, "HumanJump")

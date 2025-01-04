@@ -9,7 +9,7 @@ class_name  HumanWalk
 @export var STATE_ACCELERATION: float = 0.1
 @export var STATE_DECELERATION: float = 0.25
 
-func Enter(previous_state):
+func Enter(_previous_state):
 	player.SPEED = STATE_SPEED
 	player.ACCELERATION = STATE_ACCELERATION
 	player.DECELERATION = STATE_DECELERATION
@@ -17,8 +17,9 @@ func Enter(previous_state):
 	Global.State_check = "Human Walking"
 	ANIMATION_PLAYER.play("Walking")
 
+
 func Exit():
-	ANIMATION_PLAYER.speed_scale = 1.0
+	ANIMATION_PLAYER.speed_scale = 1.0 #### required for other animation to work, in previous code it is set to 0.0 ####
 
 func Physics_update(_delta: float):
 
@@ -26,13 +27,13 @@ func Physics_update(_delta: float):
 	if player.velocity.length() == 0.0:
 		Transitioned.emit(self, "HumanIdle")
 
-	elif player.is_on_floor() == false:
+	if player.is_on_floor() and Input.is_action_just_pressed("Jump"):
 		Transitioned.emit(self, "HumanJump")
 
-	elif player.is_on_floor() and Input.is_action_pressed("Sprint"):
+	if player.is_on_floor() and Input.is_action_pressed("Sprint"):
 		Transitioned.emit(self, "HumanSprint")
 
-	elif player.is_on_floor() and Input.is_action_just_pressed("Crouch"):
+	if player.is_on_floor() and Input.is_action_just_pressed("Crouch"):
 		Transitioned.emit(self, "HumanCrouch")
 
 func set_animation_speed():
