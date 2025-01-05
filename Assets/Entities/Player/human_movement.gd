@@ -39,6 +39,9 @@ func Physics_update(_delta: float):
 
 	if player.is_on_floor() and Input.is_action_just_pressed("Crouch"):
 		Transitioned.emit(self, "HumanCrouch")
+	
+	if player.velocity.y < -5.0 and player.is_on_floor() == false:
+		Transitioned.emit(self, "HumanFall")
 
 func set_animation_speed():
 	var alpha = remap(Global.Player_speed, 0.0, STATE_SPEED, 0.0, 1.0)

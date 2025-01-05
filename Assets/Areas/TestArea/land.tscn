@@ -94,7 +94,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_g13jm")
 shape = SubResource("BoxShape3D_kh1gg")
 
 [node name="platformcrouchdog" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.075, 0.151822, 28.202)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.70552, 1.26172, 28.202)
 collision_mask = 3
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="platformcrouchdog"]
@@ -113,6 +113,50 @@ mesh = SubResource("BoxMesh_5qaxx")
 surface_material_override/0 = SubResource("StandardMaterial3D_1bwwx")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="platformcrouchdog2"]
+shape = SubResource("BoxShape3D_lyt3x")
+
+[node name="platformcrouchdog3" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.7179, 4.05953, 28.202)
+collision_mask = 3
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="platformcrouchdog3"]
+mesh = SubResource("BoxMesh_5qaxx")
+surface_material_override/0 = SubResource("StandardMaterial3D_1bwwx")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="platformcrouchdog3"]
+shape = SubResource("BoxShape3D_lyt3x")
+
+[node name="platformcrouchdog4" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.7179, 5.60153, 17.8118)
+collision_mask = 3
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="platformcrouchdog4"]
+mesh = SubResource("BoxMesh_5qaxx")
+surface_material_override/0 = SubResource("StandardMaterial3D_1bwwx")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="platformcrouchdog4"]
+shape = SubResource("BoxShape3D_lyt3x")
+
+[node name="platformcrouchdog5" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34.829, 7.6275, 17.8118)
+collision_mask = 3
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="platformcrouchdog5"]
+mesh = SubResource("BoxMesh_5qaxx")
+surface_material_override/0 = SubResource("StandardMaterial3D_1bwwx")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="platformcrouchdog5"]
+shape = SubResource("BoxShape3D_lyt3x")
+
+[node name="platformcrouchdog6" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34.829, 9.82612, 26.0773)
+collision_mask = 3
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="platformcrouchdog6"]
+mesh = SubResource("BoxMesh_5qaxx")
+surface_material_override/0 = SubResource("StandardMaterial3D_1bwwx")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="platformcrouchdog6"]
 shape = SubResource("BoxShape3D_lyt3x")
 
 [editable path="TestArea"]

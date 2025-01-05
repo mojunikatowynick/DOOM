@@ -27,8 +27,6 @@ func _ready():
 
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
-	#CROUCH_SHAPECAST.add_exception($".")
-
 func _physics_process(delta):
 	update_input()
 	move_and_slide()

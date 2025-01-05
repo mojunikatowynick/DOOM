@@ -20,15 +20,17 @@ func Enter(_previous_state):
 
 func Physics_update(_delta: float):
 
-
 	if player.is_on_floor() and Input.is_action_just_pressed("Jump"):
 		Transitioned.emit(self, "HumanJump")
 	
 	if player.is_on_floor() and Input.is_action_just_pressed("Crouch"):
 		Transitioned.emit(self, "HumanCrouch")
 
-	if player.velocity != Vector3.ZERO and player.is_on_floor():
+	if  player.is_on_floor() and player.velocity.length() != 0.0:
 		Transitioned.emit(self, "HumanWalk")
+	
+	if player.velocity.y < -5.0 and player.is_on_floor() == false:
+		Transitioned.emit(self, "HumanFall")
 
-	if player.velocity != Vector3.ZERO and player.is_on_floor() and Input.is_action_just_pressed("Sprint"):
-		Transitioned.emit(self, "HumanSprint")
+	#if player.velocity.length() != 0.0 and player.is_on_floor() and Input.is_action_pressed("Sprint"):
+		#Transitioned.emit(self, "HumanSprint")

@@ -1,5 +1,5 @@
 extends State
-class_name  HumanJump
+class_name  HumanFall
 
 @export var player: CharacterBody3D
 @export var ANIMATION_PLAYER: AnimationPlayer
@@ -15,8 +15,7 @@ func Enter(_previous_state):
 	player.DECELERATION = STATE_DECELERATION
 	
 	player.velocity.y = player.JUMP_VELOCITY
-	ANIMATION_PLAYER.play("Jump_Start")
-	Global.State_check = "Human Jump"
+	Global.State_check = "Human Fall"
 
 func Exit():
 	DOUBLE_JUMP = true
@@ -37,6 +36,3 @@ func Physics_update(_delta: float):
 			Transitioned.emit(self, "HumanIdle")
 		else:
 			Transitioned.emit(self, "HumanWalk")
-#
-	#if player.velocity.y < -5 and player.is_on_floor() == false:
-		#Transitioned.emit(self, "HumanFall")
