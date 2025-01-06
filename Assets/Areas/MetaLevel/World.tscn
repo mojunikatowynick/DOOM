@@ -16,9 +16,6 @@ script = ExtResource("1_aattw")
 [node name="Player" parent="." instance=ExtResource("2_700yf")]
 unique_name_in_owner = true
 
-[node name="Sword" parent="Player/CameraControler/Camera3D/WeaponController" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-
 [node name="AnimationPlayer" parent="Player" index="3"]
 blend_times = [&"Crouch", &"Jump_Start", 0.1, &"Crouch", &"Walking", 0.5]
 
@@ -28,5 +25,4 @@ blend_times = [&"Crouch", &"Jump_Start", 0.1, &"Crouch", &"Walking", 0.5]
 [editable path="Land/TestArea"]
 [editable path="Player"]
 [editable path="Player/CameraControler/Camera3D/WeaponController/Sword"]
-[editable path="Player/CameraControler/Camera3D/WeaponController/Sword/Sword"]
 [editable path="UI"]
