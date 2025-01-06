@@ -1,0 +1,18 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://brpehetjb8inu"]
+
+[ext_resource type="Shader" uid="uid://dkv1axhpvw7hg" path="res://Assets/Items/Weapons/FOV_clipping_shader.tres" id="1_3yhl5"]
+
+[resource]
+resource_name = "Material.001"
+render_priority = 0
+shader = ExtResource("1_3yhl5")
+shader_parameter/viewmodel_fov = 75.0
+shader_parameter/albedo = Color(0.860403, 0.868404, 0.892404, 1)
+shader_parameter/specular = 0.5
+shader_parameter/metallic = 1.0
+shader_parameter/roughness = 0.246032
+shader_parameter/metallic_texture_channel = Vector4(1, 0, 0, 0)
+shader_parameter/roughness_texture_channel = Vector4(1, 0, 0, 0)
+shader_parameter/normal_scale = 0.5
+shader_parameter/uv1_scale = Vector3(1, 1, 1)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)

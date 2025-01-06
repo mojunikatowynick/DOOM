@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Weapons" load_steps=3 format=3 uid="uid://cbvnhjvywbcn2"]
+
+[ext_resource type="Script" path="res://Assets/Items/Weapons/Weapons.gd" id="1_33p2o"]
+[ext_resource type="ArrayMesh" uid="uid://cbrpkstv1t8p2" path="res://Assets/Items/Weapons/Sword/WeaponMesh.mesh" id="1_qo1gq"]
+
+[resource]
+script = ExtResource("1_33p2o")
+name = &"Sword_Left"
+position = Vector3(-0.245, 0, -0.595)
+rotation = Vector3(46.5, 0, 0)
+scale = Vector3(0, 0, 0)
+mesh = ExtResource("1_qo1gq")
+shadow = true
+damage = 0.0
