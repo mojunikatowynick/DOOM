@@ -8,7 +8,6 @@ script = ExtResource("1_icuil")
 name = &"Sword_R"
 position = Vector3(0.305, 0, -0.76)
 rotation = Vector3(65.025, 19.79, 0)
-scale = Vector3(0.1, 0.1, 0.1)
 mesh = ExtResource("1_t4f85")
 shadow = true
 damage = 0.0

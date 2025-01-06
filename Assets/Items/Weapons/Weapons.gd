@@ -4,7 +4,6 @@ class_name Weapons extends Resource
 @export_category("Weapon Orientation")
 @export var position: Vector3
 @export var rotation: Vector3
-@export var scale: Vector3
 @export_category("Visual Setting")
 @export var mesh: Mesh
 @export var shadow: bool
