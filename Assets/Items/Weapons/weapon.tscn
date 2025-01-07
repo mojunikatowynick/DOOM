@@ -1,8 +1,16 @@
-[gd_scene load_steps=8 format=4 uid="uid://cb375ruvvp2vf"]
+[gd_scene load_steps=11 format=4 uid="uid://cb375ruvvp2vf"]
 
 [ext_resource type="Script" path="res://Assets/Items/Weapons/Init_weapon.gd" id="1_3t3td"]
 [ext_resource type="Resource" uid="uid://dtwofnxulcao4" path="res://Assets/Items/Weapons/Sword/Sword_Right.tres" id="2_uf61g"]
 [ext_resource type="ArrayMesh" uid="uid://cbrpkstv1t8p2" path="res://Assets/Items/Weapons/Sword/WeaponMesh.mesh" id="4_maiim"]
+
+[sub_resource type="Gradient" id="Gradient_rll33"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_2sy6o"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_wrf6e"]
+color_ramp = SubResource("Gradient_rll33")
+noise = SubResource("FastNoiseLite_2sy6o")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tvn44"]
 
@@ -42,9 +50,10 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_xyoya")
 
 [node name="Weapon" type="Node3D"]
-transform = Transform3D(0.94094, 0.306915, 0.142954, 0, 0.422223, -0.906492, -0.338574, 0.852955, 0.397286, 0.305, 0, -0.76)
+transform = Transform3D(0.094094, 0.0226813, 0.0251372, 0, 0.0742444, -0.0669908, -0.0338574, 0.0630344, 0.0698595, 0.305, 0, -0.76)
 script = ExtResource("1_3t3td")
 WEAPON_TYPE = ExtResource("2_uf61g")
+sway_noise = SubResource("NoiseTexture2D_wrf6e")
 
 [node name="SwordMesh" type="MeshInstance3D" parent="."]
 cast_shadow = 0
