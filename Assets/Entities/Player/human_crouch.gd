@@ -7,7 +7,9 @@ class_name  HumanCrouch
 @export var STATE_SPEED: float = 2.0
 @export var STATE_ACCELERATION: float = 0.1
 @export var STATE_DECELERATION: float = 0.1
-
+@export var WEAPON_BOB_SPEED: float = 4
+@export var WEAPON_BOB_H: float = 1
+@export var WEAPON_BOB_V: float = 1
 var RELEASED: bool = false
 
 func Enter(previous_state):
@@ -27,7 +29,10 @@ func Enter(previous_state):
 func Exit():
 	RELEASED = false
 
-func Physics_update(_delta: float):
+func Physics_update(delta: float):
+
+	WEAPON.sway_weapon(delta, false)
+	WEAPON._weapon_bob(delta, WEAPON_BOB_SPEED, WEAPON_BOB_H, WEAPON_BOB_V)
 
 	if Input.is_action_just_released("Crouch"):
 		uncrouch()

@@ -7,7 +7,9 @@ class_name  HumanSprint
 @export var STATE_ACCELERATION: float = 0.1
 @export var STATE_DECELERATION: float = 0.25
 @export var TOP_ANIM_SPEED: float = 3.0
-
+@export var WEAPON_BOB_SPEED: float = 8
+@export var WEAPON_BOB_H: float = 2.5
+@export var WEAPON_BOB_V: float = 2
 func Enter(_previous_state):
 	player.SPEED = STATE_SPEED
 	player.ACCELERATION = STATE_ACCELERATION
@@ -24,8 +26,11 @@ func Exit():
 	ANIMATION_PLAYER.speed_scale = 1.0 #### required for other animation to work, in previous code it is set to 0.0 ####
 
 
-func Physics_update(_delta: float):
+func Physics_update(delta: float):
 
+	WEAPON.sway_weapon(delta, false)
+	WEAPON._weapon_bob(delta, WEAPON_BOB_SPEED, WEAPON_BOB_H, WEAPON_BOB_V)
+	
 	set_animation_speed()
 
 	if player.is_on_floor() and player.velocity.length() == 0.0:

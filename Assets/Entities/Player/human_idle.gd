@@ -18,7 +18,9 @@ func Enter(_previous_state):
 
 	Global.State_check = "Human Idle"
 
-func Physics_update(_delta: float):
+func Physics_update(delta: float):
+	
+	WEAPON.sway_weapon(delta, true)
 
 	if player.is_on_floor() and Input.is_action_just_pressed("Jump"):
 		Transitioned.emit(self, "HumanJump")

@@ -8,6 +8,9 @@ class_name  HumanWalk
 @export var STATE_SPEED: float = 5.0
 @export var STATE_ACCELERATION: float = 0.1
 @export var STATE_DECELERATION: float = 0.25
+@export var WEAPON_BOB_SPEED: float = 6
+@export var WEAPON_BOB_H: float = 2
+@export var WEAPON_BOB_V: float = 1
 
 func Enter(_previous_state):
 	player.SPEED = STATE_SPEED
@@ -25,8 +28,11 @@ func Enter(_previous_state):
 func Exit():
 	ANIMATION_PLAYER.speed_scale = 1.0 #### required for other animation to work, in previous code it is set to 0.0 ####
 
-func Physics_update(_delta: float):
+func Physics_update(delta: float):
 
+	WEAPON.sway_weapon(delta, false)
+	WEAPON._weapon_bob(delta, WEAPON_BOB_SPEED, WEAPON_BOB_H, WEAPON_BOB_V)
+	
 	set_animation_speed()
 	if player.velocity.length() == 0.0:
 		Transitioned.emit(self, "HumanIdle")

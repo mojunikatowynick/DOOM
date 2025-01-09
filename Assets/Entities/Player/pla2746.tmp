@@ -401,18 +401,14 @@ intensity = 0.25
 [node name="WeaponRig" type="Node3D" parent="CameraControler/Camera3D"]
 
 [node name="Weapon" parent="CameraControler/Camera3D/WeaponRig" instance=ExtResource("2_vh3li")]
-unique_name_in_owner = true
-transform = Transform3D(0.094094, 0.0226813, 0.0251372, 0, 0.0742444, -0.0669908, -0.0338574, 0.0630344, 0.0698595, -0.00567006, 0.00958971, -0.76)
-reset = false
+transform = Transform3D(0.094094, 0.0226813, 0.0251372, 0, 0.0742444, -0.0669908, -0.0338574, 0.0630344, 0.0698595, 0.305, 0, -0.76)
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("2_eptjr")
 initial_state = NodePath("HumanIdle")
 
-[node name="HumanIdle" type="Node" parent="StateMachine" node_paths=PackedStringArray("player", "ANIMATION_PLAYER")]
+[node name="HumanIdle" type="Node" parent="StateMachine"]
 script = ExtResource("3_lc4jw")
-player = NodePath("../..")
-ANIMATION_PLAYER = NodePath("../../AnimationPlayer")
 
 [node name="HumanWalk" type="Node" parent="StateMachine" node_paths=PackedStringArray("player", "ANIMATION_PLAYER")]
 script = ExtResource("3_rusd6")

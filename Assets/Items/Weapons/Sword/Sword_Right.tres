@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("1_icuil")
 name = &"Sword_R"
-position = Vector3(0.305, 0, -0.76)
+position = Vector3(0.975, 0, -0.76)
 rotation = Vector3(42.06, 19.79, 0)
 scale = Vector3(0.1, 0.1, 0.1)
 sway_min = Vector2(-20, -20)
