@@ -10,11 +10,11 @@ extends Node3D
 
 @export var sway_noise: NoiseTexture2D
 @export var sway_speed: float = 1.2
-@export var reset: bool = false:
-	set(value):
-		reset = value
-		if Engine.is_editor_hint():
-			load_weapon()
+#@export var reset: bool = false:
+	#set(value):
+		#reset = value
+		#if Engine.is_editor_hint():
+			#load_weapon()
 
 @onready var weapon_mesh = $SwordMesh
 @onready var weapon_shadow = $ShadowMesh
@@ -68,8 +68,6 @@ func sway_weapon(delta) -> void:
 	time += delta * (sway_speed + sway_random)
 	random_sway_x = sin(time * 1.5 + sway_random_adjusted) / random_sway_amount
 	random_sway_y = sin(time - sway_random_adjusted) / random_sway_amount
-	
-	
 	
 	#lerp so we move from current pos to mouse for by 10% of what is set
 	position.x = lerp(position.x, WEAPON_TYPE.position.x - (mouse_movement.x * WEAPON_TYPE.sway_amount_position + random_sway_x) * delta, WEAPON_TYPE.sway_speed_position)

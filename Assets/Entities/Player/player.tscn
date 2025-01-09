@@ -401,7 +401,7 @@ intensity = 0.25
 [node name="WeaponRig" type="Node3D" parent="CameraControler/Camera3D"]
 
 [node name="Weapon" parent="CameraControler/Camera3D/WeaponRig" instance=ExtResource("2_vh3li")]
-transform = Transform3D(0.0946471, 0.0219839, 0.0236354, 0, 0.0732225, -0.0681063, -0.0322789, 0.0644606, 0.069303, 0.308075, -0.003173, -0.76)
+transform = Transform3D(0.094094, 0.0226813, 0.0251372, 0, 0.0742444, -0.0669908, -0.0338574, 0.0630344, 0.0698595, 0.305, 0, -0.76)
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("2_eptjr")
