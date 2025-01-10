@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://cge0mobn3tpw1"]
+[gd_scene load_steps=7 format=3 uid="uid://cge0mobn3tpw1"]
 
 [ext_resource type="Script" path="res://Assets/Areas/MetaLevel/world.gd" id="1_aattw"]
 [ext_resource type="PackedScene" uid="uid://bxfyh13buqn8g" path="res://Assets/Areas/Skybox/skybox_1.tscn" id="1_fsbew"]
 [ext_resource type="PackedScene" uid="uid://cysvwq6vufnuq" path="res://Assets/Areas/TestArea/land.tscn" id="1_he54e"]
 [ext_resource type="PackedScene" uid="uid://b1t0d7fsy6bix" path="res://Assets/Entities/Player/player.tscn" id="2_700yf"]
 [ext_resource type="PackedScene" uid="uid://byksa8i31mdc2" path="res://Assets/UI/UIScene/ui.tscn" id="4_eh5sq"]
+[ext_resource type="ArrayMesh" uid="uid://ctv03joks8jm" path="res://Assets/Items/Weapons/Sword2/Gun_Mesh.tres" id="5_73ymn"]
 
 [node name="World" type="Node3D"]
 script = ExtResource("1_aattw")
@@ -16,9 +17,8 @@ script = ExtResource("1_aattw")
 [node name="Player" parent="." instance=ExtResource("2_700yf")]
 unique_name_in_owner = true
 
-[node name="Weapon" parent="Player/CameraControler/Camera3D/WeaponRig" index="0"]
-transform = Transform3D(0.094094, 0.0226813, 0.0251372, 0, 0.0742444, -0.0669908, -0.0338574, 0.0630344, 0.0698595, 0.305, 0, -0.76)
-reset = null
+[node name="ShadowMesh" parent="Player/CameraControler/Camera3D/WeaponRig/Weapon" index="1"]
+mesh = ExtResource("5_73ymn")
 
 [node name="AnimationPlayer" parent="Player" index="3"]
 blend_times = [&"Crouch", &"Jump_Start", 0.1, &"Crouch", &"Walking", 0.5]

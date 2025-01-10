@@ -18,6 +18,7 @@ class_name Weapons extends Resource
 @export_range(0.1, 10.0, 0.1) var random_sway_amount: float = 5.0
 @export_category("Visual Setting")
 @export var mesh: ArrayMesh
+@export var shadow_mesh: ArrayMesh
 @export var shadow: bool
 @export_category("In game parameters")
 @export var damage: float

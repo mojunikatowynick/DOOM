@@ -46,6 +46,7 @@ func _input(event):
 func load_weapon():
 	#we connect those values from weapons.gs wich is resource type file
 	weapon_mesh.mesh = WEAPON_TYPE.mesh
+	weapon_shadow.mesh = WEAPON_TYPE.shadow_mesh
 	position = WEAPON_TYPE.position
 	rotation_degrees = WEAPON_TYPE.rotation
 	scale = WEAPON_TYPE.scale
