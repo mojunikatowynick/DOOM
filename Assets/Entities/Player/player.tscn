@@ -421,8 +421,9 @@ intensity = 0.25
 
 [node name="WeaponRig" type="Node3D" parent="CameraControler/Camera3D"]
 
-[node name="Weapon" parent="CameraControler/Camera3D/WeaponRig" instance=ExtResource("2_vh3li")]
+[node name="Weapon" parent="CameraControler/Camera3D/WeaponRig" node_paths=PackedStringArray("CAMERA_CONTROLER") instance=ExtResource("2_vh3li")]
 unique_name_in_owner = true
+CAMERA_CONTROLER = NodePath("../..")
 
 [node name="ShadowMesh" parent="CameraControler/Camera3D/WeaponRig/Weapon" index="1"]
 mesh = SubResource("ArrayMesh_0wtwn")

@@ -40,10 +40,14 @@ func _physics_process(delta):
 		velocity += get_gravity() * delta
 	
 		# Handle jump.
-	if Input.is_action_just_pressed("Jump") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
+	#if Input.is_action_just_pressed("Jump") and is_on_floor():
+		#velocity.y = JUMP_VELOCITY
+		
+
+
 
 	_update_camera(delta)
+	
 
 func update_input():
 		# Get the input direction and handle the movement/deceleration.

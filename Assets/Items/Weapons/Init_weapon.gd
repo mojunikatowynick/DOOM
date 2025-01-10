@@ -2,6 +2,7 @@
 
 class_name WeaponController extends Node3D
 
+@export var CAMERA_CONTROLER: Camera3D
 
 @export var WEAPON_TYPE: Weapons:
 	set(value):
@@ -28,6 +29,8 @@ var random_sway_amount: float
 var time: float = 0.0
 var idle_sway_adjustment
 var idle_sway_rotation_strength
+
+var ray_cast_test = preload("res://Assets/UFX/decal.tscn")
 
 func _ready():
 	await owner.ready
@@ -103,3 +106,25 @@ func get_sway_noise() -> float:
 	
 	var noise_location: float = sway_noise.noise.get_noise_2d(player_position.x, player_position.y)
 	return noise_location
+
+###basic set up for raycast ### 
+func _attack() -> void:
+	var camera = CAMERA_CONTROLER
+	var space_state = camera.get_world_3d().direct_space_state
+	var screen_center = get_viewport().size / 2
+	var origin = camera.project_ray_origin(screen_center)
+	var end = origin + camera.project_ray_normal(screen_center) * 1000
+	var query = PhysicsRayQueryParameters3D.create(origin, end)
+	query.collide_with_bodies = true
+	var result = space_state.intersect_ray(query)
+	if result:
+		test_ray_cast(result.get("position"))
+
+	print(result.get("position"))
+func test_ray_cast(position: Vector3) -> void:
+	var instance = ray_cast_test.instantiate()
+	get_tree().root.add_child(instance)
+	instance.global_position = position
+	await get_tree().create_timer(3).timeout
+	instance.queue_free()
+	

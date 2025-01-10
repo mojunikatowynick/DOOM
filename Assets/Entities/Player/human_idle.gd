@@ -34,5 +34,7 @@ func Physics_update(delta: float):
 	if player.velocity.y < -5.0 and player.is_on_floor() == false:
 		Transitioned.emit(self, "HumanFall")
 
-	#if player.velocity.length() != 0.0 and player.is_on_floor() and Input.is_action_pressed("Sprint"):
-		#Transitioned.emit(self, "HumanSprint")
+
+	if Input.is_action_just_pressed("FirePrimary"):
+		WEAPON._attack()
+		#print("asta")
