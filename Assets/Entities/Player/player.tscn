@@ -1,7 +1,8 @@
-[gd_scene load_steps=24 format=4 uid="uid://b1t0d7fsy6bix"]
+[gd_scene load_steps=25 format=4 uid="uid://b1t0d7fsy6bix"]
 
 [ext_resource type="Script" path="res://Assets/Entities/Player/player.gd" id="1_s4w7m"]
 [ext_resource type="Script" path="res://Assets/Entities/Player/state_machine.gd" id="2_eptjr"]
+[ext_resource type="Script" path="res://Assets/Entities/Player/recoil.gd" id="2_q3oye"]
 [ext_resource type="PackedScene" uid="uid://cb375ruvvp2vf" path="res://Assets/Items/Weapons/weapon.tscn" id="2_vh3li"]
 [ext_resource type="Script" path="res://Assets/Entities/Player/human_idle.gd" id="3_lc4jw"]
 [ext_resource type="Script" path="res://Assets/Entities/Player/human_movement.gd" id="3_rusd6"]
@@ -234,7 +235,7 @@ tracks/7/keys = {
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("CameraControler/Camera3D:fov")
+tracks/8/path = NodePath("CameraControler/Recoil/Camera3D:fov")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
@@ -335,7 +336,7 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("CameraControler/Camera3D:fov")
+tracks/6/path = NodePath("CameraControler/Recoil/Camera3D:fov")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -400,7 +401,7 @@ collision_layer = 2
 collision_mask = 13
 script = ExtResource("1_s4w7m")
 MOUSE_SENSITIVITY = 0.4
-CAMERA_CONTROLER = NodePath("CameraControler/Camera3D")
+CAMERA_CONTROLER = NodePath("CameraControler/Recoil/Camera3D")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -413,19 +414,22 @@ mesh = SubResource("CapsuleMesh_1c8e6")
 [node name="CameraControler" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 
-[node name="Camera3D" type="Camera3D" parent="CameraControler"]
+[node name="Recoil" type="Node3D" parent="CameraControler"]
+script = ExtResource("2_q3oye")
 
-[node name="ReflectionProbe" type="ReflectionProbe" parent="CameraControler/Camera3D"]
+[node name="Camera3D" type="Camera3D" parent="CameraControler/Recoil"]
+
+[node name="ReflectionProbe" type="ReflectionProbe" parent="CameraControler/Recoil/Camera3D"]
 update_mode = 1
 intensity = 0.25
 
-[node name="WeaponRig" type="Node3D" parent="CameraControler/Camera3D"]
+[node name="WeaponRig" type="Node3D" parent="CameraControler/Recoil/Camera3D"]
 
-[node name="Weapon" parent="CameraControler/Camera3D/WeaponRig" node_paths=PackedStringArray("CAMERA_CONTROLER") instance=ExtResource("2_vh3li")]
+[node name="Weapon" parent="CameraControler/Recoil/Camera3D/WeaponRig" node_paths=PackedStringArray("CAMERA_CONTROLER") instance=ExtResource("2_vh3li")]
 unique_name_in_owner = true
 CAMERA_CONTROLER = NodePath("../..")
 
-[node name="ShadowMesh" parent="CameraControler/Camera3D/WeaponRig/Weapon" index="1"]
+[node name="ShadowMesh" parent="CameraControler/Recoil/Camera3D/WeaponRig/Weapon/RecoilPosition" index="1"]
 mesh = SubResource("ArrayMesh_0wtwn")
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
@@ -482,4 +486,4 @@ debug_shape_custom_color = Color(0, 0.520508, 0.110723, 1)
 
 [connection signal="animation_started" from="AnimationPlayer" to="." method="_on_animation_player_animation_started"]
 
-[editable path="CameraControler/Camera3D/WeaponRig/Weapon"]
+[editable path="CameraControler/Recoil/Camera3D/WeaponRig/Weapon"]

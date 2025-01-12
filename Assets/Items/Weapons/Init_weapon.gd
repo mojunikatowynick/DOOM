@@ -2,6 +2,8 @@
 
 class_name WeaponController extends Node3D
 
+signal weapon_fired
+
 @export var CAMERA_CONTROLER: Camera3D
 
 @export var WEAPON_TYPE: Weapons:
@@ -18,8 +20,8 @@ class_name WeaponController extends Node3D
 		if Engine.is_editor_hint():
 			load_weapon()
 
-@onready var weapon_mesh = $SwordMesh
-@onready var weapon_shadow = $ShadowMesh
+@onready var weapon_mesh = $RecoilPosition/WeaponMesh
+@onready var weapon_shadow = $RecoilPosition/ShadowMesh
 
 var mouse_movement: Vector2
 var weapon_bob_amount: Vector2 = Vector2(0,0)
@@ -33,7 +35,7 @@ var idle_sway_rotation_strength
 var ray_cast_test = preload("res://Assets/UFX/decal.tscn")
 
 func _ready():
-	await owner.ready
+
 	load_weapon()
 
 func _input(event):
@@ -109,6 +111,7 @@ func get_sway_noise() -> float:
 
 ###basic set up for raycast ### 
 func _attack() -> void:
+	weapon_fired.emit()
 	var camera = CAMERA_CONTROLER
 	var space_state = camera.get_world_3d().direct_space_state
 	var screen_center = get_viewport().size / 2
@@ -118,13 +121,21 @@ func _attack() -> void:
 	query.collide_with_bodies = true
 	var result = space_state.intersect_ray(query)
 	if result:
-		test_ray_cast(result.get("position"))
+		bullet_hole(result.get("position"), result.get("normal"))
 
-	print(result.get("position"))
-func test_ray_cast(position: Vector3) -> void:
+	#print(result.get("position"), result)
+	
+##spawns decal on result of attack ray cast collision###
+func bullet_hole(pos: Vector3, normal: Vector3) -> void:
 	var instance = ray_cast_test.instantiate()
 	get_tree().root.add_child(instance)
-	instance.global_position = position
+	instance.global_position = pos
+	if normal != Vector3.UP and normal != Vector3.DOWN:
+		instance.look_at(instance.global_transform.origin + normal, Vector3.UP)
+		instance.rotate_object_local(Vector3(1, 0, 0), 90)
 	await get_tree().create_timer(3).timeout
+	var fade = get_tree().create_tween()
+	fade.tween_property(instance, "modulate:a", 0, 1.5)
+	await fade.finished
 	instance.queue_free()
 	
