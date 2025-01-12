@@ -39,8 +39,12 @@ script = ExtResource("1_3t3td")
 WEAPON_TYPE = ExtResource("2_rqrqn")
 sway_noise = SubResource("NoiseTexture2D_wrf6e")
 
-[node name="RecoilPosition" type="Node3D" parent="."]
+[node name="RecoilPosition" type="Node3D" parent="." node_paths=PackedStringArray("weapon")]
 script = ExtResource("3_uq8ny")
+recoil_amount = Vector3(0.1, 0.5, 1)
+snap_amount = 10.0
+speed = 20.0
+weapon = NodePath("..")
 
 [node name="WeaponMesh" type="MeshInstance3D" parent="RecoilPosition"]
 cast_shadow = 0
