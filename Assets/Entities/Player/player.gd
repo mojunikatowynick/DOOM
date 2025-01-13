@@ -14,6 +14,8 @@ class_name Player extends CharacterBody3D
 @export var TTIL_UPPER_LIMIT : = deg_to_rad(90.0)
 @export var CAMERA_CONTROLER : Camera3D
 @export var WEAPON_CONTROLLER : WeaponController
+#adding interacting variables
+@export var interact_distance: float = 2
 
 var _mouse_input: bool = false
 var _mouse_rotation: Vector3
@@ -21,7 +23,7 @@ var _rotation_input: float
 var _tilt_input: float
 var _player_rotation: Vector3
 var _camera_rotation: Vector3
-
+var interact_cast_result
 var _current_rotation: float
 
 func _ready():
@@ -31,23 +33,15 @@ func _ready():
 func _physics_process(delta):
 	update_input()
 	move_and_slide()
-
+	interact_cast()
 	Global.Player_speed = velocity.length()
 	Global.Player_on_floor = is_on_floor()
 	Global.Player_position = global_position
 		# Add the gravity. PLAYER_CONTROLER: CharacterBody3D
 	if not is_on_floor():
 		velocity += get_gravity() * delta
-	
-		# Handle jump.
-	#if Input.is_action_just_pressed("Jump") and is_on_floor():
-		#velocity.y = JUMP_VELOCITY
-		
-
-
 
 	_update_camera(delta)
-	
 
 func update_input():
 		# Get the input direction and handle the movement/deceleration.
@@ -61,7 +55,6 @@ func update_input():
 		velocity.x = move_toward(velocity.x, 0, DECELERATION)
 		velocity.z = move_toward(velocity.z, 0, DECELERATION)
 
-
 func _unhandled_input(event):
 
 	_mouse_input = event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED
@@ -70,6 +63,9 @@ func _unhandled_input(event):
 		_tilt_input = -event.relative.y * MOUSE_SENSITIVITY
 		#print(Vector2(_rotation_input,_tilt_input))
 
+func _input(event):
+	if event.is_action_pressed("Interact"):
+		interact()
 
 func _update_camera(delta):
 
@@ -87,3 +83,26 @@ func _update_camera(delta):
 	
 	_rotation_input = 0.0
 	_tilt_input = 0.0
+
+# creating ray of lenght of 2m that checks for bodies if it is check if it is inteactable and allows to "e" use
+func interact_cast() -> void:
+	var camera = CAMERA_CONTROLER
+	var space_state = camera.get_world_3d().direct_space_state # get what we look at
+	var screen_center = get_viewport().size / 2 # to get mid point from size of viewport
+	var origin = camera.project_ray_origin(screen_center) # from where we cast raycast
+	var end = origin + camera.project_ray_normal(screen_center) * interact_distance # setting distance of raycast
+	var query = PhysicsRayQueryParameters3D.create(origin, end)
+	query.collide_with_bodies = true
+	var result = space_state.intersect_ray(query)
+	var current_cast_result = result.get("collider")
+	if current_cast_result != interact_cast_result:
+		if interact_cast_result and interact_cast_result.has_user_signal("unfocused"):
+			print(str(interact_cast_result) + " unfocused")
+		interact_cast_result = current_cast_result
+		if interact_cast_result and interact_cast_result.has_user_signal("focused"):
+			print(str(interact_cast_result) + " focused")
+
+func interact() -> void:
+	if interact_cast_result and interact_cast_result.has_user_signal("interacted"):
+		interact_cast_result.emit_signal("interacted")
+	

@@ -1,6 +1,7 @@
-[gd_scene load_steps=21 format=3 uid="uid://cysvwq6vufnuq"]
+[gd_scene load_steps=22 format=3 uid="uid://cysvwq6vufnuq"]
 
 [ext_resource type="PackedScene" uid="uid://75yfqm3lg0ul" path="res://Assets/Areas/TestArea/Graphic/TestArea.blend" id="1_6fpgm"]
+[ext_resource type="Script" path="res://Assets/Scripts/Interactions_Component.gd" id="2_jdqqx"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_hksb2"]
 size = Vector3(150, 0.005, 104)
@@ -79,6 +80,9 @@ surface_material_override/0 = SubResource("StandardMaterial3D_e6cfa")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="cube"]
 shape = SubResource("BoxShape3D_dnvhs")
+
+[node name="InteractionComponent" type="Node" parent="cube"]
+script = ExtResource("2_jdqqx")
 
 [node name="platform" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.075, 2.5, 8.131)
@@ -178,5 +182,8 @@ mesh = SubResource("SphereMesh_oejk5")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.61202, 0, -3.07759)
 shape = SubResource("ConcavePolygonShape3D_ccqil")
+
+[node name="InteractionComponent" type="Node" parent="StaticBody3D"]
+script = ExtResource("2_jdqqx")
 
 [editable path="TestArea"]

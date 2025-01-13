@@ -113,10 +113,10 @@ func get_sway_noise() -> float:
 func _attack() -> void:
 	weapon_fired.emit()
 	var camera = CAMERA_CONTROLER
-	var space_state = camera.get_world_3d().direct_space_state
-	var screen_center = get_viewport().size / 2
-	var origin = camera.project_ray_origin(screen_center)
-	var end = origin + camera.project_ray_normal(screen_center) * 1000
+	var space_state = camera.get_world_3d().direct_space_state # get what we look at
+	var screen_center = get_viewport().size / 2 # to get mid point
+	var origin = camera.project_ray_origin(screen_center) # from where
+	var end = origin + camera.project_ray_normal(screen_center) * 1000 # setting distance of raycast
 	var query = PhysicsRayQueryParameters3D.create(origin, end)
 	query.collide_with_bodies = true
 	var result = space_state.intersect_ray(query)

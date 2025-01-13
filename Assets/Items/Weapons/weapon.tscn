@@ -44,7 +44,7 @@ initial_velocity_max = 1.5
 gravity = Vector3(0, 0, 0)
 
 [sub_resource type="Gradient" id="Gradient_61aif"]
-colors = PackedColorArray(1, 0.682353, 0.2, 1, 0, 0, 0, 1)
+colors = PackedColorArray(1, 0.682353, 0.2, 1, 0.77541, 0.0408035, 2.88785e-07, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_wc2lg"]
 gradient = SubResource("Gradient_61aif")
@@ -105,6 +105,14 @@ light_energy = 3.0
 omni_range = 7.0
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="MuzzleFlash"]
+emitting = false
+lifetime = 0.05
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_rdr26")
+draw_pass_1 = SubResource("QuadMesh_33nki")
+
+[node name="GPUParticles3D2" type="GPUParticles3D" parent="MuzzleFlash"]
 emitting = false
 lifetime = 0.05
 one_shot = true
