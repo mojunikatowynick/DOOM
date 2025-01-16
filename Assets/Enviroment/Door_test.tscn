@@ -27,12 +27,14 @@ operation = 2
 size = Vector3(1.5, 2.5, 0.5)
 
 [node name="AnimatableBody3D" type="AnimatableBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -0.25, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="AnimatableBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)
 mesh = SubResource("BoxMesh_0w214")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="AnimatableBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)
 shape = SubResource("ConcavePolygonShape3D_7pjsh")
 
 [node name="InteractionComponent" type="Node" parent="AnimatableBody3D"]
@@ -40,5 +42,6 @@ script = ExtResource("1_xjmeb")
 
 [node name="DoorComponent" type="Node" parent="AnimatableBody3D"]
 script = ExtResource("2_jron6")
+forward_direction = 2
 direction = Vector3(1, 0, 0)
 door_size = Vector3(1.5, 2.5, 0.3)

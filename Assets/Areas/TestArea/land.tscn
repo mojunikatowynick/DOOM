@@ -195,5 +195,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 1.5, 13)
 [node name="InteractionComponent" parent="DoorWall/AnimatableBody3D" index="2"]
 context = "Open Door"
 
+[node name="DoorComponent" parent="DoorWall/AnimatableBody3D" index="3"]
+door_type = 1
+
+[node name="DoorWall2" parent="." instance=ExtResource("3_nj7ao")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.4466, 1.5, 5.86182)
+
 [editable path="TestArea"]
 [editable path="DoorWall"]
+[editable path="DoorWall2"]

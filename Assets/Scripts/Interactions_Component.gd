@@ -40,4 +40,5 @@ func not_in_range():
 	MessageBus.interaction_unfocused.emit()
 
 func interact():
-	print("interacted ", parent)
+	#print("interacted ", parent)
+	pass
