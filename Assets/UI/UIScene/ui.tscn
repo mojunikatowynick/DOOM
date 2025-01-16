@@ -1,23 +1,26 @@
-[gd_scene load_steps=3 format=3 uid="uid://byksa8i31mdc2"]
+[gd_scene load_steps=5 format=3 uid="uid://byksa8i31mdc2"]
 
 [ext_resource type="Script" path="res://Assets/UI/UIScene/ui.gd" id="1_602x5"]
 [ext_resource type="Theme" uid="uid://hv86oovvx72g" path="res://Assets/Theme/UI/Debug.tres" id="2_m4l3y"]
+[ext_resource type="Script" path="res://Assets/UI/UIScene/context_component.gd" id="3_hf5um"]
+[ext_resource type="Texture2D" uid="uid://dtwbvldt5vgu" path="res://Assets/UI/UI Icons/tile_0359.png" id="4_370iu"]
 
 [node name="UI" type="CanvasLayer"]
 script = ExtResource("1_602x5")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
-anchors_preset = 10
+anchors_preset = 15
 anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 4
 
 [node name="MarginContainer" type="MarginContainer" parent="Control"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.01
-anchor_top = 0.1
 anchor_right = 0.9
 anchor_bottom = 0.1
 offset_right = 40.0
@@ -47,6 +50,32 @@ theme = ExtResource("2_m4l3y")
 [node name="IsOnFloorLabel" type="Label" parent="Control/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("2_m4l3y")
+
+[node name="ContextComponent" type="CenterContainer" parent="Control" node_paths=PackedStringArray("icon", "label")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 55.89
+offset_bottom = 55.89
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_hf5um")
+icon = NodePath("HBoxContainer/TextureRect")
+label = NodePath("HBoxContainer/Label")
+default_icon = ExtResource("4_370iu")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/ContextComponent"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Control/ContextComponent/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("4_370iu")
+expand_mode = 2
+
+[node name="Label" type="Label" parent="Control/ContextComponent/HBoxContainer"]
+layout_mode = 2
+text = "efwsfwfwewf"
 
 [node name="UserInterfaceGame" type="Control" parent="."]
 layout_mode = 3

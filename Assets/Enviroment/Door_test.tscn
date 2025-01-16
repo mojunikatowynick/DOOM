@@ -1,0 +1,44 @@
+[gd_scene load_steps=7 format=3 uid="uid://gy014hul8kpm"]
+
+[ext_resource type="Script" path="res://Assets/Scripts/Interactions_Component.gd" id="1_xjmeb"]
+[ext_resource type="Script" path="res://Assets/Scripts/door_component.gd" id="2_jron6"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vwine"]
+albedo_color = Color(0.689964, 0.469632, 0.424506, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u621p"]
+albedo_color = Color(0.575367, 0.552036, 0.621413, 1)
+metallic = 1.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_0w214"]
+material = SubResource("StandardMaterial3D_u621p")
+size = Vector3(1.5, 2.5, 0.3)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_7pjsh"]
+data = PackedVector3Array(-0.75, 1.25, 0.15, 0.75, 1.25, 0.15, -0.75, -1.25, 0.15, 0.75, 1.25, 0.15, 0.75, -1.25, 0.15, -0.75, -1.25, 0.15, 0.75, 1.25, -0.15, -0.75, 1.25, -0.15, 0.75, -1.25, -0.15, -0.75, 1.25, -0.15, -0.75, -1.25, -0.15, 0.75, -1.25, -0.15, 0.75, 1.25, 0.15, 0.75, 1.25, -0.15, 0.75, -1.25, 0.15, 0.75, 1.25, -0.15, 0.75, -1.25, -0.15, 0.75, -1.25, 0.15, -0.75, 1.25, -0.15, -0.75, 1.25, 0.15, -0.75, -1.25, -0.15, -0.75, 1.25, 0.15, -0.75, -1.25, 0.15, -0.75, -1.25, -0.15, 0.75, 1.25, 0.15, -0.75, 1.25, 0.15, 0.75, 1.25, -0.15, -0.75, 1.25, 0.15, -0.75, 1.25, -0.15, 0.75, 1.25, -0.15, -0.75, -1.25, 0.15, 0.75, -1.25, 0.15, -0.75, -1.25, -0.15, 0.75, -1.25, 0.15, 0.75, -1.25, -0.15, -0.75, -1.25, -0.15)
+
+[node name="DoorWall" type="CSGBox3D"]
+size = Vector3(10, 3, 0.5)
+material = SubResource("StandardMaterial3D_vwine")
+
+[node name="DoorOpen" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
+operation = 2
+size = Vector3(1.5, 2.5, 0.5)
+
+[node name="AnimatableBody3D" type="AnimatableBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="AnimatableBody3D"]
+mesh = SubResource("BoxMesh_0w214")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AnimatableBody3D"]
+shape = SubResource("ConcavePolygonShape3D_7pjsh")
+
+[node name="InteractionComponent" type="Node" parent="AnimatableBody3D"]
+script = ExtResource("1_xjmeb")
+
+[node name="DoorComponent" type="Node" parent="AnimatableBody3D"]
+script = ExtResource("2_jron6")
+direction = Vector3(1, 0, 0)
+door_size = Vector3(1.5, 2.5, 0.3)

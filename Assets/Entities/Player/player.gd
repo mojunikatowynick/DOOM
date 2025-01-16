@@ -97,10 +97,10 @@ func interact_cast() -> void:
 	var current_cast_result = result.get("collider")
 	if current_cast_result != interact_cast_result:
 		if interact_cast_result and interact_cast_result.has_user_signal("unfocused"):
-			print(str(interact_cast_result) + " unfocused")
+			interact_cast_result.emit_signal("unfocused")
 		interact_cast_result = current_cast_result
 		if interact_cast_result and interact_cast_result.has_user_signal("focused"):
-			print(str(interact_cast_result) + " focused")
+			interact_cast_result.emit_signal("focused")
 
 func interact() -> void:
 	if interact_cast_result and interact_cast_result.has_user_signal("interacted"):

@@ -1,18 +1,18 @@
-[gd_scene load_steps=22 format=3 uid="uid://cysvwq6vufnuq"]
+[gd_scene load_steps=24 format=3 uid="uid://cysvwq6vufnuq"]
 
 [ext_resource type="PackedScene" uid="uid://75yfqm3lg0ul" path="res://Assets/Areas/TestArea/Graphic/TestArea.blend" id="1_6fpgm"]
 [ext_resource type="Script" path="res://Assets/Scripts/Interactions_Component.gd" id="2_jdqqx"]
+[ext_resource type="Texture2D" uid="uid://bb648csox5ubg" path="res://Assets/UI/UI Icons/tile_0395.png" id="3_ah2yo"]
+[ext_resource type="PackedScene" uid="uid://gy014hul8kpm" path="res://Assets/Enviroment/Door_test.tscn" id="3_nj7ao"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_hksb2"]
 size = Vector3(150, 0.005, 104)
 
-[sub_resource type="BoxMesh" id="BoxMesh_0ia0h"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_560gf"]
+albedo_color = Color(0.280227, 0.419898, 0.274556, 1)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e6cfa"]
-albedo_color = Color(0.282353, 0.678431, 0.282353, 1)
-metallic = 1.0
-metallic_specular = 1.0
-roughness = 0.66
+[sub_resource type="BoxMesh" id="BoxMesh_0ia0h"]
+material = SubResource("StandardMaterial3D_560gf")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_dnvhs"]
 
@@ -71,18 +71,18 @@ data = PackedVector3Array(0, 0.5, 0, 0, 0.5, 0, 0, 0.4977, 0.0475, 0, 0.5, 0, 0.
 shape = SubResource("BoxShape3D_hksb2")
 
 [node name="cube" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.46809, 0.5, -5.34112)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.46809, 0.511838, -5.34112)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="cube"]
 mesh = SubResource("BoxMesh_0ia0h")
 skeleton = NodePath("../..")
-surface_material_override/0 = SubResource("StandardMaterial3D_e6cfa")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="cube"]
 shape = SubResource("BoxShape3D_dnvhs")
 
 [node name="InteractionComponent" type="Node" parent="cube"]
 script = ExtResource("2_jdqqx")
+context = "Check interaction"
 
 [node name="platform" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.075, 2.5, 8.131)
@@ -185,5 +185,15 @@ shape = SubResource("ConcavePolygonShape3D_ccqil")
 
 [node name="InteractionComponent" type="Node" parent="StaticBody3D"]
 script = ExtResource("2_jdqqx")
+context = "Just to check if icon"
+override_icon = true
+new_icon = ExtResource("3_ah2yo")
+
+[node name="DoorWall" parent="." instance=ExtResource("3_nj7ao")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 1.5, 13)
+
+[node name="InteractionComponent" parent="DoorWall/AnimatableBody3D" index="2"]
+context = "Open Door"
 
 [editable path="TestArea"]
+[editable path="DoorWall"]
