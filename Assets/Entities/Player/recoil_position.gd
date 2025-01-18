@@ -10,6 +10,7 @@ var current_position: Vector3
 var target_position: Vector3
 
 func _ready():
+	
 	weapon.weapon_fired.connect(add_recoil)
 
 func _process(delta):
