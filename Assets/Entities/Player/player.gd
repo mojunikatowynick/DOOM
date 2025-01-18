@@ -1,6 +1,5 @@
 class_name Player extends CharacterBody3D
 
-
 @export var SPEED: float 
 @export var ACCELERATION: float 
 @export var DECELERATION: float 
@@ -14,7 +13,6 @@ class_name Player extends CharacterBody3D
 @export var TTIL_UPPER_LIMIT : = deg_to_rad(90.0)
 @export var CAMERA_CONTROLER : Camera3D
 @export var WEAPON_CONTROLLER : WeaponController
-
 
 var _mouse_input: bool = false
 var _mouse_rotation: Vector3
